@@ -2,6 +2,7 @@ package com.jgji.selfassessment.global.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -22,6 +23,13 @@ class SecurityConfig {
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authorizeHttpRequests {
                 it.anyRequest().permitAll()
+            }
+            .headers {
+                it.contentTypeOptions(Customizer.withDefaults())
+                    .xssProtection(Customizer.withDefaults())
+                    .cacheControl(Customizer.withDefaults())
+                    .httpStrictTransportSecurity(Customizer.withDefaults())
+                    .frameOptions(Customizer.withDefaults())
             }
 
         return http.build()
