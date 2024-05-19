@@ -1,4 +1,4 @@
-package com.jgji.selfassessment.domain.user.domain;
+package com.jgji.selfassessment.domain.activity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,40 +15,40 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "activities")
+public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private long id;
 
-    @Comment("유저 닉네임")
-    @Column(name = "nickname", nullable = false, length = 255)
-    private String nickname;
+    @Comment("작성한 유저 아이디")
+    @Column(name = "user_id", nullable = false)
+    private long userId;
 
-    @Comment("이메일")
-    @Column(name = "email", nullable = false, unique = true, length = 255)
-    private String email;
+    @Comment("평가 대상일")
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
-    @Comment("비밀번호")
-    @Column(name = "password", nullable = false, length = 255)
-    private String password;
+    @Comment("행동 시작시간")
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
 
-    @Comment("생성일시")
+    @Comment("행동 종료시간")
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
-    @Comment("수정일시")
+    @Comment("설명")
     @LastModifiedDate
-    @Column(name = "updated_at", nullable = false, insertable = false)
-    private LocalDateTime updatedAt;
-
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 }
