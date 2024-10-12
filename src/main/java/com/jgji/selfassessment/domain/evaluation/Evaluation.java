@@ -35,6 +35,6 @@ public class Evaluation {
     private int score;
 
     @Comment("코멘트")
-    @Column(name = "comment", columnDefinition = "TEXT")
+    @Column(name = "comment")
     private String comment;
 }

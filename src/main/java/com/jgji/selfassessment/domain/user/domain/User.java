@@ -30,15 +30,15 @@ public class User {
     private long id;
 
     @Comment("유저 닉네임")
-    @Column(name = "nickname", nullable = false, length = 255)
+    @Column(name = "nickname", nullable = false, length = 50)
     private String nickname;
 
     @Comment("이메일")
-    @Column(name = "email", nullable = false, unique = true, length = 255)
+    @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
     @Comment("비밀번호")
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
     @Comment("생성일시")

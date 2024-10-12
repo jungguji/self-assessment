@@ -1,74 +1,84 @@
+-- 회원정보
 CREATE TABLE users (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  nickname VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  password VARCHAR(255) NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nickname VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_users_nickname(nickname),
+  UNIQUE KEY uk_users_email(email)
 );
 
+-- 활동
 CREATE TABLE activities (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  user_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED  AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   date DATE NOT NULL,
-  start_time DATETIME NULL,
-  end_time DATETIME NULL,
+  start_time TIME NULL,
+  end_time TIME NULL,
   description TEXT,
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE evaluations (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  activity_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  activity_id INT UNSIGNED NOT NULL,
   score UNSIGNED TINYINT NOT NULL CHECK (score BETWEEN 1 AND 10),
-  comment TEXT,
-  FOREIGN KEY (activity_id) REFERENCES Activities(id)
+  comment varchar(500),
+  FOREIGN KEY (activity_id) REFERENCES activities(id)
 );
 
 -- 일단위 평가 저장 테이블
 CREATE TABLE daily_evaluations (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  user_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   date DATE NOT NULL,
-  score FLOAT NOT NULL DEFAULT 0.0,
+  score DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  comment TEXT,
   UNIQUE KEY uk_daily_evaluations (user_id, date),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 주단위 평가 저장 테이블
 CREATE TABLE weekly_evaluations (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  user_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   week_start_date DATE NOT NULL,  -- 주의 첫 번째 날 (월요일)
-  score FLOAT NOT NULL DEFAULT 0.0,
+  score DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  comment TEXT,
   UNIQUE KEY uk_weekly_evaluations (user_id, week_start_date),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 월단위 평가 저장 테이블
 CREATE TABLE monthly_evaluations (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  user_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   month DATE NOT NULL,
-  score FLOAT NOT NULL DEFAULT 0.0,
+  score DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  comment TEXT,
   UNIQUE KEY uk_monthly_evaluations (user_id, month),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 년단위 평가 저장 테이블
 CREATE TABLE yearly_evaluations (
-  id UNSIGNED INT AUTO_INCREMENT PRIMARY KEY,
-  user_id UNSIGNED INT NOT NULL,
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
   year DATE NOT NULL,
-  score FLOAT NOT NULL DEFAULT 0.0,
+  score DECIMAL(3,1) NOT NULL DEFAULT 0.0,
+  comment TEXT,
   UNIQUE KEY uk_yearly_evaluations (user_id, year),
-  FOREIGN KEY (user_id) REFERENCES users(user_id)
+  FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- 일단위 평가 그룹 테이블
 create table daily_evaluations_group (
-  evaluation_id UNSIGNED INT not null,
-  daily_evaluation_id UNSIGNED INT not null,
+  evaluation_id INT UNSIGNED not null,
+  daily_evaluation_id INT UNSIGNED not null,
   PRIMARY KEY (evaluation_id, daily_evaluation_id)
   FOREIGN KEY (evaluation_id) REFERENCES evaluations(id)
   FOREIGN KEY (daily_evaluation_id) REFERENCES daily_evaluations(id)

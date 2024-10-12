@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @EntityListeners(AuditingEntityListener.class)
@@ -33,5 +34,9 @@ public class MonthlyEvaluation {
 
     @Comment("점수")
     @Column(name = "score", nullable = false)
-    private float score = 0.0f;
+    private BigDecimal score;
+
+    @Comment("코멘트")
+    @Column(name = "comment")
+    private String comment;
 }
