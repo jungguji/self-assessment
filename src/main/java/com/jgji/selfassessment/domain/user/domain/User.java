@@ -26,7 +26,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", columnDefinition = "INT UNSIGNED", nullable = false, updatable = false)
     private long id;
 
     @Comment("유저 닉네임")

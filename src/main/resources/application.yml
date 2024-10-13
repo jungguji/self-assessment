@@ -3,4 +3,6 @@ spring:
     name: self-assessment
 
   config:
-    import: "classpath:yml/token.yml"
+    import:
+      - "classpath:yml/token.yml"
+      - "classpath:yml/datasource.yml"

@@ -23,15 +23,15 @@ public class Evaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", columnDefinition = "INT UNSIGNED", nullable = false, updatable = false)
     private long id;
 
     @Comment("활동 ID")
-    @Column(name = "activity_id", nullable = false)
+    @Column(name = "activity_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long activityId;
 
     @Comment("평점")
-    @Column(name = "score", nullable = false)
+    @Column(name = "score", columnDefinition = "TINYINT UNSIGNED", nullable = false)
     private int score;
 
     @Comment("코멘트")
