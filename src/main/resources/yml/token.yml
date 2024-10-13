@@ -1,0 +1,5 @@
+token:
+  jwt:
+    key:
+      secret: 1anIzukNXVIYa8ybPmrSWRZcGmpxwcxF
+    expiration-ms: 8640000
