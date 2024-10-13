@@ -8,28 +8,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class JwtPropertiesImpl implements JwtProperties {
 
-    private Key key = new Key();
+    private String secretKey;
     private long expirationMs;
 
     @Override
-    public String getSecret() {
-        return this.key.getSecret();
+    public String getSecretKey() {
+        return this.secretKey;
     }
 
     @Override
     public long getExpirationMs() {
         return this.expirationMs;
-    }
-
-    private class Key {
-        private String secret;
-
-        public String getSecret() {
-            return secret;
-        }
-
-        public void setSecret(String secret) {
-            this.secret = secret;
-        }
     }
 }

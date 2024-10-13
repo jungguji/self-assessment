@@ -13,13 +13,18 @@ import java.security.Key;
 import java.util.Date;
 
 @Slf4j
-@RequiredArgsConstructor
 @Component
-public class JwtProvider implements TokenProvider {
+class JwtProvider implements TokenProvider {
 
     private final JwtProperties jwtProperties;
-    private final Key key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
-    private final long expirationMs = jwtProperties.getExpirationMs();
+    private final Key key;
+    private final long expirationMs;
+
+    public JwtProvider(JwtProperties jwtProperties) {
+        this.jwtProperties = jwtProperties;
+        this.key = Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes());
+        this.expirationMs = jwtProperties.getExpirationMs();
+    }
 
     public String generateJwtToken(String username) {
         return Jwts.builder()
