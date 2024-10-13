@@ -1,6 +1,6 @@
 package com.jgji.selfassessment.global.config.security.token.filter;
 
-import com.jgji.selfassessment.domain.account.application.CustomUserDetailsService;
+import com.jgji.selfassessment.domain.auth.application.CustomUserDetailsService;
 import com.jgji.selfassessment.global.config.security.token.TokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -32,8 +32,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = getJwt(request);
 
-            if (jwt != null && tokenProvider.validateJwtToken(jwt)) {
-                String username = tokenProvider.getUsernameFromJwtToken(jwt);
+            if (jwt != null && tokenProvider.validateToken(jwt)) {
+                String username = tokenProvider.getUsernameFromToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

@@ -1,4 +1,4 @@
-package com.jgji.selfassessment.domain.account.application;
+package com.jgji.selfassessment.domain.auth.application;
 
 import com.jgji.selfassessment.domain.user.domain.User;
 import com.jgji.selfassessment.domain.user.infrastructure.UserRepository;

@@ -5,7 +5,6 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +25,7 @@ class JwtProvider implements TokenProvider {
         this.expirationMs = jwtProperties.getExpirationMs();
     }
 
-    public String generateJwtToken(String username) {
+    public String generateToken(String username) {
         return Jwts.builder()
             .setSubject(username)
             .setIssuedAt(new Date())
@@ -35,7 +34,7 @@ class JwtProvider implements TokenProvider {
             .compact();
     }
 
-    public String getUsernameFromJwtToken(String token) {
+    public String getUsernameFromToken(String token) {
         return Jwts.parser()
             .setSigningKey(key)
             .build()
@@ -44,7 +43,7 @@ class JwtProvider implements TokenProvider {
             .getSubject();
     }
 
-    public boolean validateJwtToken(String authToken) {
+    public boolean validateToken(String authToken) {
         try {
             Jwts.parser()
                 .setSigningKey(key)
