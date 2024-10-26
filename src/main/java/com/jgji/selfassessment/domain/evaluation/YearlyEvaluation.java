@@ -21,11 +21,11 @@ public class YearlyEvaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "id", columnDefinition = "INT UNSIGNED", nullable = false, updatable = false)
     private long id;
 
     @Comment("유저 아이디")
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long userId;
 
     @Comment("평가 연도")

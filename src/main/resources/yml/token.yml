@@ -1,0 +1,4 @@
+token:
+  jwt:
+    secret-key: 6543892f1a5f456e74f4ad50ae319dcc2ea9b7b673ada59f0f1397a12e7cfc2e06ceb1b15ce9846687e621a9ddeff38fe2024f08ebf5e8d9812557833faea4c9
+    expiration-ms: 8640000

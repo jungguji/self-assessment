@@ -16,11 +16,11 @@ import java.util.Objects;
 public class MonthlyEvaluationsGroupId implements Serializable {
 
     @Comment("주단위 평가 그룹 아이디")
-    @Column(name = "weekly_evaluations_group_id", nullable = false)
+    @Column(name = "weekly_evaluations_group_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long weeklyEvaluationsGroupId;
 
     @Comment("월단위 평가 아이디")
-    @Column(name = "monthly_evaluation_id", nullable = false)
+    @Column(name = "monthly_evaluation_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long monthlyEvaluationId;
 
     public MonthlyEvaluationsGroupId(long weeklyEvaluationsGroupId, long monthlyEvaluationId) {

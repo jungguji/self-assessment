@@ -16,11 +16,11 @@ import java.util.Objects;
 public class DailyEvaluationsGroupId implements Serializable {
 
     @Comment("평가 아이디")
-    @Column(name = "evaluation_id", nullable = false)
+    @Column(name = "evaluation_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long evaluationId;
 
     @Comment("평가 일단위 평가 아이디")
-    @Column(name = "daily_evaluation_id", nullable = false)
+    @Column(name = "daily_evaluation_id", columnDefinition = "INT UNSIGNED", nullable = false)
     private long dailyEvaluationId;
 
     public DailyEvaluationsGroupId(long evaluationId, long dailyEvaluationId) {

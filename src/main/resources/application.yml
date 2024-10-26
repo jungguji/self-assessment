@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: self-assessment
+
+  config:
+    import:
+      - "classpath:yml/token.yml"
+      - "classpath:yml/datasource.yml"
