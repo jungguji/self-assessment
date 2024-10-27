@@ -1,4 +1,4 @@
-package com.jgji.selfassessment.domain.activity;
+package com.jgji.selfassessment.domain.activity.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
